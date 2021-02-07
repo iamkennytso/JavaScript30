@@ -62,13 +62,57 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: right;
     }
 
   </style>
 
   <script>
+    // const handsArray = ['hour-hand', 'min-hand', 'second-hand']
 
+    const updateTime = () => {
+      const currTime = new Date();
+      const degreesPerHour = 360 / 12;
+      const degreesPerMinSec = 360 / 60;
 
+      const currHour = currTime.getHours()
+      const formattedHour = currHour > 12 ? currHour % 12 : currHour
+      const hourRotation = (degreesPerHour * formattedHour) + 90
+
+      const currMinute = currTime.getMinutes()
+      const minuteRotation = (degreesPerMinSec * currMinute) + 90;
+
+      const currSeconds = currTime.getSeconds()
+      const secondRotation = (degreesPerMinSec * currSeconds) + 90;
+
+      // this is actually really bad because it keeps appending css without deleting the old ones
+      // const style = document.createElement('style');
+      // style.textContent  = `
+      //   .hour-hand {
+      //     transform: rotate(${hourRotation}deg)
+      //   }
+      //   .min-hand {
+      //     transform: rotate(${minuteRotation}deg)
+      //   }
+      //   .second-hand {
+      //     transform: rotate(${secondRotation}deg)
+      //   }
+      // `;
+      // document.head.append(style);
+
+      const hourHand = document.querySelector('.hour-hand');
+      const minHand = document.querySelector('.min-hand');
+      const secondHand = document.querySelector('.second-hand');
+      hourHand.style.transform = `rotate(${hourRotation}deg)`
+      minHand.style.transform = `rotate(${minuteRotation}deg)`
+      secondHand.style.transform = `rotate(${secondRotation}deg)`;
+    }
+
+    setInterval(() => {
+      updateTime();
+    }, 1000)
+
+    updateTime();
   </script>
 </body>
 </html>

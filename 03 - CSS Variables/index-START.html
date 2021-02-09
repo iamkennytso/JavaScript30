@@ -46,36 +46,33 @@
 
   <script>
     // i don't like css variables.
-    const state = { spacing: 10, blur: 10, base: '#ffc600' }
-
     const inputs = document.querySelectorAll('input')
     const image = document.querySelector('img')
     const word = document.querySelector('.hl')
 
     const updateStyles = (event) => {
-      let changedState
+      let changedState, changedValue
       // there's no event the first time
       if (event) {
         changedState = event.target.id
-        state[changedState] = event.target.value
+        changedValue = event.target.value
       }
-      const { base, blur, spacing } = state
 
       switch(changedState) {
         case 'spacing':
-          return image.style.padding = `${spacing}px`
+          return image.style.padding = `${changedValue}px`
         case 'blur':
-          return image.style.filter = `blur(${blur}px)`
+          return image.style.filter = `blur(${changedValue}px)`
         case 'base':
-          word.style.color = base
-          image.style.background = base
+          word.style.color = changedValue
+          image.style.background = changedValue
           break;
         // i could have just hard coded the default values as initial values in the css, but meh
         default:
-          word.style.color = base
-          image.style.background = base
-          image.style.filter = `blur(${blur}px)`
-          image.style.padding = `${spacing}px`
+          word.style.color = '#ffc600'
+          image.style.background = '#ffc600'
+          image.style.filter = `blur(10px)`
+          image.style.padding = `10px`
       }
     }
 

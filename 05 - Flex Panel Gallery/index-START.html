@@ -24,6 +24,7 @@
     }
 
     .panels {
+      display:flex;
       min-height: 100vh;
       overflow: hidden;
     }
@@ -43,6 +44,10 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: space-evenly;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -59,20 +64,26 @@
     }
 
     .panel p {
+      transition: transform 1s;
       text-transform: uppercase;
       font-family: 'Amatic SC', cursive;
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
     }
-    
+
+    .panel > *:first-child { transform: translateY(-1000%); }
+    .panel.open > *:first-child { transform: translateY(0); }
+    .panel > *:last-child { transform: translateY(1000%); }
+    .panel.open > *:last-child { transform: translateY(0); }
+
     .panel p:nth-child(2) {
       font-size: 4em;
     }
 
     .panel.open {
+      flex-grow: 10;
       font-size: 40px;
     }
-
   </style>
 
 
@@ -105,7 +116,22 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel')
+    panels.forEach(panel => panel.addEventListener('click', open))
+    function open(e) {
+      let divElement
+      if ( e.srcElement.localName === 'p') {
+        divElement = e.path[1]
+      } else {
+        divElement = e.target
+      }
 
+      panels.forEach(panel => panel.classList.remove('open'))
+      divElement.classList.add('open')
+    }
+
+    // hoisting
+    // visibility: hidden vs display: none
   </script>
 
 

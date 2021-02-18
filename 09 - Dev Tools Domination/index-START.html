@@ -18,28 +18,45 @@
     }
 
     // Regular
-
+    console.log('hello')
     // Interpolated
-
+    console.log('hello %s', 'world')
     // Styled
-
+    console.log('%c super duper', 'font-size: 20px; background: grey')
     // warning!
-
+    console.warn('i be a warning')
     // Error :|
-
+    console.error('i be an error')
     // Info
-
+    console.info('i be an info')
     // Testing
-
+    console.assert(true === 1, '1 is not triple equal true')
     // clearing
-
+    // console.clear()
     // Viewing DOM Elements
-
+    const p = document.querySelector('p')
+    console.dir(p)
     // Grouping together
-
+    console.groupCollapsed('poem')
+    console.log('hello world')
+    console.log('let there be elements, and thus html')
+    console.log('let them look good, and thus css')
+    console.log('let them be interactive, and thus javascript')
+    console.groupEnd('poem')
     // counting
+    console.count('sheep')
+    console.count('sheep')
+    console.count('sheep')
+    console.count('sheep')
+
 
     // timing
+    console.time('timetime')
+    setTimeout(() => {
+      console.timeEnd('timetime')
+    }, 1000)
+
+    console.table(dogs)
 
   </script>
 </body>

@@ -96,6 +96,36 @@
   </div>
 
 <script>
+  let shiftDown = false
+  let lastClickedIdx
+  document.addEventListener('keydown', handleShiftDown)
+  document.addEventListener('keyup', handleShiftUp)
+  const items = document.querySelectorAll('input[type="checkbox"]')
+  items.forEach((item, idx) => item.addEventListener('change', () => handleCheckChangeChange(idx)))
+
+  function handleShiftDown(e) {
+    if (e.key === 'Shift') {
+      shiftDown = true
+    }
+  }
+
+  function handleShiftUp(e) {
+    if (e.key === 'Shift') {
+      shiftDown = false
+    }
+  }
+
+  function handleCheckChangeChange(idx) {
+    const start = Math.min(lastClickedIdx, idx)
+    const end = Math.max(lastClickedIdx, idx)
+    if (shiftDown && lastClickedIdx !== undefined) {
+      for (let i = start; i <= end; i++) {
+        items[i].checked = true
+      }
+    }
+    lastClickedIdx = idx;
+  }
+
 </script>
 </body>
 </html>

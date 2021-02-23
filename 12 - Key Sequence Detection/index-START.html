@@ -3,10 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Key Detection</title>
-  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+  <!-- <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script> -->
 </head>
 <body>
 <script>
+  const seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13]
+  let cur = 0
+  function trackKey(e) {
+    if (e.keyCode === seq[cur]) {
+      cur++;
+    } else if (e.keyCode === seq[0]) {
+      cur = 1
+    } else {
+      console.log('resetting')
+      cur = 0;
+    }
+    if (cur === 11) {
+      document.body.style['background-color'] = 'red'
+      cur = 0
+    }
+  }
+  window.addEventListener('keydown', trackKey)
 </script>
 </body>
 </html>
